@@ -17,6 +17,7 @@ api/uploads/
 *.jpeg
 *.png
 *.gif
+!favicon.png
 
 # Logs
 *.log

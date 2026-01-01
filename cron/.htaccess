@@ -1,0 +1,4 @@
+# Deny all access to cron directory
+Order allow,deny
+Deny from all
+

@@ -1,0 +1,70 @@
+# QuickPoll Security Configuration
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^(config\.php|database\.sql|\.htaccess)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Limit file upload size (5MB) - may not work in .htaccess, check php.ini
+php_value upload_max_filesize 5M
+php_value post_max_size 5M
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Enable error logging (disable display)
+php_flag display_errors Off
+php_flag log_errors On
+
+# Set default directory index
+DirectoryIndex index.html
+
+# URL Rewriting for clean URLs
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /QuickPoll/
+    
+    # Force HTTP for localhost (redirect HTTPS to HTTP)
+    RewriteCond %{HTTPS} on
+    RewriteCond %{HTTP_HOST} ^localhost [NC,OR]
+    RewriteCond %{HTTP_HOST} ^127\.0\.0\.1 [NC]
+    RewriteRule ^(.*)$ http://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+    
+    # Redirect /index.html to root (301 permanent redirect)
+    RewriteCond %{THE_REQUEST} \s/QuickPoll/index\.html[\s?] [NC]
+    RewriteRule ^index\.html$ /QuickPoll/ [R=301,L]
+    
+    # Skip rewrite rules for existing files (including API files)
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+    
+    # Skip rewrite rules for existing directories
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+    
+    # Serve index.html for root directory (if not already a file or directory)
+    RewriteCond %{REQUEST_URI} ^/QuickPoll/?$ [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^$ index.html [L]
+    
+    # Clean URL: /poll/abc123 -> poll.html?id=abc123
+    RewriteRule ^poll/([a-zA-Z0-9]+)$ poll.html?id=$1 [L,QSA]
+    
+    # Block suspicious requests (but exclude API directory and existing files)
+    RewriteCond %{REQUEST_URI} !^/QuickPoll/api/ [NC]
+    RewriteCond %{QUERY_STRING} (eval\(|base64_decode|gzip|exec\(|phpinfo) [NC,OR]
+    RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>

@@ -153,12 +153,27 @@ body::before {
 .form-select {
     background: linear-gradient(135deg, rgba(53, 53, 74, 0.8) 0%, rgba(61, 61, 90, 0.8) 100%);
     border: 2px solid var(--border-color);
-    color: var(--text-primary);
+    color: var(--text-primary) !important;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 12px;
     padding: 0.75rem 1rem;
     font-size: 1rem;
     position: relative;
+}
+.form-select option {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    padding: 0.5rem;
+}
+.form-select:not([multiple]):not([size]) {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e8e8e8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem;
+}
+.form-select:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%236366f1' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
 }
 .form-control:hover,
 .form-select:hover {
@@ -183,11 +198,15 @@ body::before {
     opacity: 0.7;
 }
 .form-label {
-    color: var(--text-secondary);
+    color: var(--text-primary) !important;
     font-weight: 600;
     margin-bottom: 0.75rem;
     font-size: 0.95rem;
     letter-spacing: 0.3px;
+}
+.form-label i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
 }
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
@@ -725,6 +744,10 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0.5rem 0.75rem;
     border-radius: 12px;
     transition: all 0.3s ease;
+    color: white !important;
+}
+.badge i {
+    color: inherit !important;
 }
 .badge:hover {
     transform: translateY(-2px) scale(1.05);
@@ -732,10 +755,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 .badge.bg-info {
     background: linear-gradient(135deg, var(--info-color) 0%, #2563eb 100%) !important;
+    color: white !important;
     box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
 }
 .badge.bg-success {
     background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%) !important;
+    color: white !important;
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
 }
 
@@ -1124,8 +1149,8 @@ html {
     border: 1px solid var(--border-color);
 }
 .badge.bg-info {
-    background-color: var(--info-light) !important;
-    color: var(--info-color);
+    background: linear-gradient(135deg, var(--info-color) 0%, #2563eb 100%) !important;
+    color: white !important;
     border: 1px solid var(--info-color);
 }
 .badge.bg-primary {

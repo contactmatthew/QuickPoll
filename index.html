@@ -41,18 +41,36 @@
             <div class="col-12 col-md-8 col-lg-6 mx-auto mb-5">
                 <div class="card main-card">
                     <div class="card-body p-4 p-md-5">
-                        <div class="text-center mb-4">
-                            <h1 class="display-4 mb-3 text-white">QuickPoll</h1>
-                            <p class="lead text-muted">Create instant polls and share them with anyone</p>
+                        <div class="text-center mb-5">
+                            <div class="mb-3">
+                                <i class="bi bi-bar-chart-fill text-primary" style="font-size: 4rem; filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.4));"></i>
+                            </div>
+                            <h1 class="display-4 mb-3 text-white fade-in">QuickPoll</h1>
+                            <p class="lead text-muted mb-4">Create instant polls and share them with anyone</p>
+                            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                <span class="badge bg-primary px-3 py-2">
+                                    <i class="bi bi-lightning-charge"></i> Instant
+                                </span>
+                                <span class="badge bg-info px-3 py-2">
+                                    <i class="bi bi-share"></i> Shareable
+                                </span>
+                                <span class="badge bg-success px-3 py-2">
+                                    <i class="bi bi-lock"></i> Secure
+                                </span>
+                            </div>
                         </div>
                         <div id="createPollSection">
                             <form id="pollForm">
                                 <div class="mb-4">
-                                    <label for="pollTitle" class="form-label">Poll Title</label>
+                                    <label for="pollTitle" class="form-label">
+                                        <i class="bi bi-question-circle"></i> Poll Title
+                                    </label>
                                     <input type="text" class="form-control form-control-lg" id="pollTitle" placeholder="Enter your poll question..." required>
                                 </div>
                                 <div class="mb-4">
-                                    <label class="form-label">Expiration</label>
+                                    <label class="form-label">
+                                        <i class="bi bi-clock"></i> Expiration
+                                    </label>
                                     <div class="row g-2">
                                         <div class="col-6">
                                             <select class="form-select" id="expirationType">
@@ -65,18 +83,24 @@
                                             <div class="invalid-feedback" id="expirationFeedback"></div>
                                         </div>
                                     </div>
-                                    <small class="form-text text-muted" id="expirationHint">Maximum: 30 days</small>
+                                    <small class="form-text text-muted" id="expirationHint">
+                                        <i class="bi bi-info-circle"></i> Maximum: 30 days
+                                    </small>
                                 </div>
                                 <div class="mb-4">
                                     <label for="pollPassword" class="form-label">
-                                        Password (Optional)
+                                        <i class="bi bi-shield-lock"></i> Password (Optional)
                                         <small class="text-muted">- Leave empty for public voting</small>
                                     </label>
                                     <input type="password" class="form-control" id="pollPassword" placeholder="Enter password to protect voting (optional)">
-                                    <small class="form-text text-muted">Only people with the password can vote on this poll</small>
+                                    <small class="form-text text-muted">
+                                        <i class="bi bi-info-circle"></i> Only people with the password can vote on this poll
+                                    </small>
                                 </div>
                                 <div class="mb-4">
-                                    <label class="form-label">Options</label>
+                                    <label class="form-label">
+                                        <i class="bi bi-list-check"></i> Options
+                                    </label>
                                     <div id="optionsContainer">
                                         <div class="option-item mb-3">
                                             <div class="input-group">
@@ -100,6 +124,9 @@
                                     <button type="button" class="btn btn-outline-primary btn-sm" onclick="addOption()">
                                         <i class="bi bi-plus-circle"></i> Add Option
                                     </button>
+                                    <small class="d-block text-muted mt-2">
+                                        <i class="bi bi-info-circle"></i> You can add up to 20 options
+                                    </small>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-lg w-100" id="createBtn">
                                     <i class="bi bi-plus-circle"></i> Create Poll
@@ -107,8 +134,11 @@
                             </form>
                         </div>
                         <div id="pollCreatedSection" class="d-none">
-                            <div class="alert alert-success text-center">
-                                <h4><i class="bi bi-check-circle"></i> Poll Created!</h4>
+                            <div class="alert alert-success text-center scale-in">
+                                <div class="mb-3">
+                                    <i class="bi bi-check-circle-fill" style="font-size: 4rem; color: var(--success-color); animation: scaleIn 0.5s ease;"></i>
+                                </div>
+                                <h4 class="mb-3"><i class="bi bi-check-circle"></i> Poll Created Successfully!</h4>
                                 <p class="mb-3">Share this link with others:</p>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" id="pollLink" readonly>
@@ -130,9 +160,11 @@
                     <div class="card-body p-4 p-md-5">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h2 class="h3 mb-0 text-white">
-                                <i class="bi bi-graph-up-arrow"></i> Active Polls
+                                <i class="bi bi-graph-up-arrow text-primary"></i> Active Polls
                             </h2>
-                            <span class="badge bg-primary" id="pollsCount">0 polls</span>
+                            <span class="badge bg-primary" id="pollsCount">
+                                <i class="bi bi-list-ul"></i> 0 polls
+                            </span>
                         </div>
                         <div id="loadingPolls" class="text-center py-4">
                             <div class="spinner-border text-primary" role="status">
@@ -156,28 +188,47 @@
             <div class="col-12 col-lg-10 mx-auto">
                 <div class="card main-card">
                     <div class="card-body p-4 p-md-5">
-                        <div class="text-center mb-4">
+                        <div class="text-center mb-5">
+                            <div class="mb-3">
+                                <i class="bi bi-info-circle-fill text-info" style="font-size: 3rem;"></i>
+                            </div>
                             <h2 class="h3 mb-3 text-white">
                                 <i class="bi bi-info-circle"></i> About QuickPoll
                             </h2>
                         </div>
                         <div class="row">
                             <div class="col-12 col-md-6 mb-4 mb-md-0">
-                                <h4 class="mb-3 text-white">What is QuickPoll?</h4>
+                                <h4 class="mb-3 text-white">
+                                    <i class="bi bi-question-diamond text-primary"></i> What is QuickPoll?
+                                </h4>
                                 <p class="text-muted">
                                     QuickPoll is a simple and intuitive polling platform that allows you to create instant polls and share them with anyone. 
                                     Whether you're gathering opinions, making decisions, or just having fun, QuickPoll makes it easy to create and share polls.
                                 </p>
                             </div>
                             <div class="col-12 col-md-6">
-                                <h4 class="mb-3 text-white">Features</h4>
-                                <ul class="text-muted">
-                                    <li>Create polls with multiple options</li>
-                                    <li>Add images to poll options</li>
-                                    <li>Set expiration dates for polls</li>
-                                    <li>Password protection for voting</li>
-                                    <li>Real-time vote tracking</li>
-                                    <li>View active polls from the community</li>
+                                <h4 class="mb-3 text-white">
+                                    <i class="bi bi-star text-warning"></i> Features
+                                </h4>
+                                <ul class="text-muted list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i> Create polls with multiple options
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i> Add images to poll options
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i> Set expiration dates for polls
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i> Password protection for voting
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i> Real-time vote tracking
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i> View active polls from the community
+                                    </li>
                                 </ul>
                             </div>
                         </div>

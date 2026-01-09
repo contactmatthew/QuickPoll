@@ -1200,11 +1200,11 @@ html {
         0 8px 24px rgba(99, 102, 241, 0.5),
         0 0 0 4px rgba(99, 102, 241, 0.1),
         inset 0 2px 4px rgba(255, 255, 255, 0.2);
-    z-index: 1000;
+    z-index: 1050;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    animation: float 3s ease-in-out infinite 0.5s;
+    animation: float 3s ease-in-out infinite;
     position: relative;
     overflow: hidden;
 }
@@ -1218,20 +1218,30 @@ html {
     background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
     opacity: 0;
     transition: opacity 0.4s ease;
-}
-.floating-qr:hover::before {
-    opacity: 1;
+    pointer-events: none;
 }
 .floating-qr:hover {
-    transform: scale(1.15) translateY(-8px) rotate(5deg);
+    animation-play-state: paused;
+    transform: scale(1.15) translateY(-8px) rotate(5deg) !important;
     box-shadow: 
         0 12px 32px rgba(99, 102, 241, 0.6),
         0 0 0 6px rgba(99, 102, 241, 0.15),
         inset 0 2px 4px rgba(255, 255, 255, 0.3);
     color: white;
 }
+.floating-qr:hover::before {
+    opacity: 1;
+}
 .floating-qr:active {
-    transform: scale(1.05) translateY(-4px);
+    animation-play-state: paused;
+    transform: scale(1.05) translateY(-4px) rotate(0deg) !important;
+}
+.floating-qr:focus {
+    outline: none;
+    box-shadow: 
+        0 8px 24px rgba(99, 102, 241, 0.5),
+        0 0 0 4px rgba(99, 102, 241, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.2);
 }
 @keyframes float {
     0%, 100% {
@@ -1541,11 +1551,15 @@ body.modal-open {
 }
 @media (max-width: 768px) {
     .floating-qr {
-        width: 50px;
-        height: 50px;
+        width: 56px;
+        height: 56px;
         bottom: 20px;
         right: 20px;
-        font-size: 1.25rem;
+        font-size: 1.5rem;
+        z-index: 1050;
+    }
+    .floating-qr:hover {
+        transform: scale(1.1) translateY(-6px) rotate(3deg) !important;
     }
     .social-links {
         gap: 0.75rem;

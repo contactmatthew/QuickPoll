@@ -1,8 +1,8 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'quickpoll');
+define('DB_HOST', 'localhost'); // change this using your own hosting name
+define('DB_USER', 'root'); // own user
+define('DB_PASS', ''); // own pass
+define('DB_NAME', 'quickpoll'); // own database name
 define('MAX_POLLS_PER_IP_PER_HOUR', 5); // Max polls created per IP per hour
 define('MAX_VOTES_PER_IP_PER_MINUTE', 10); // Max votes per IP per minute
 define('MAX_IMAGE_SIZE', 5 * 1024 * 1024); // 5MB max image size
